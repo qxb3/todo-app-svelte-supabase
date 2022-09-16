@@ -5,6 +5,7 @@ import livereload from 'rollup-plugin-livereload'
 import { terser } from 'rollup-plugin-terser'
 import css from 'rollup-plugin-css-only'
 import replace from '@rollup/plugin-replace'
+import json from '@rollup/plugin-json'
 
 import dotenv from 'dotenv'
 
@@ -47,8 +48,10 @@ export default {
 			}
 		}),
 		replace({
+			preventAssignment: true,
 			env: JSON.stringify(dotenv.config().parsed)
 		}),
+		json(),
 
 		// we'll extract any component CSS out into
 		// a separate file - better for performance
